@@ -25,23 +25,12 @@ kotlin {
 
 publishing {
     publications {
-        create<MavenPublication>("Github") {
+        create<MavenPublication>("maven") {
             groupId = "info.skyblond"
             artifactId = "bencodekt"
             version = rootProject.version.toString()
 
             from(components["java"])
-        }
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/hurui200320/BencodeKt")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
         }
     }
 }

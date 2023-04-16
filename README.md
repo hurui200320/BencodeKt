@@ -2,8 +2,7 @@
 Bencode for kotlin.
 
 ![master build](https://github.com/hurui200320/BencodeKt/actions/workflows/gradle-test.yml/badge.svg)
-![release build](https://github.com/hurui200320/BencodeKt/actions/workflows/gradle-publish.yml/badge.svg)
-![release version](https://shields.io/github/v/release/hurui200320/BencodeKt)
+[![](https://jitpack.io/v/info.skyblond/bencodekt.svg)](https://jitpack.io/#info.skyblond/bencodekt)
 ![license](https://shields.io/github/license/hurui200320/BencodeKt)
 
 Bencode reader/writer for Kotlin(JVM and Android).
@@ -17,37 +16,43 @@ Requires JDK 1.8 or higher.
 First, add GitHub Package as maven repo. 
 ```xml
     <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub hurui200320/BencodeKt</name>
-            <url>https://maven.pkg.github.com/hurui200320/BencodeKt</url>
-        </repository>
+        <repositories>
+            <repository>
+                <id>jitpack.io</id>
+                <url>https://jitpack.io</url>
+            </repository>
+        </repositories>
     </distributionManagement>
 ```
 
 Then add the dependency.
 ```xml
     <dependencies>
-        <dependency>
-            <groupId>info.skyblond</groupId>
-            <artifactId>bencodekt</artifactId>
-            <version>latest</version>
-        </dependency>
+    <dependency>
+        <groupId>info.skyblond</groupId>
+        <artifactId>bencodekt</artifactId>
+        <version>Tag</version>
+    </dependency>
     </dependencies>
 ```
 
 ### Gradle
 
 First, add GitHub Package as maven repo.
-```kotlin
-repositories {
-    maven { url = uri("https://maven.pkg.github.com/hurui200320/BencodeKt") }
+```groovy
+allprojects {
+    repositories {
+        // ...
+        maven { url "https://jitpack.io" }
+    }
 }
 ```
 
 Then add the dependency.
 ```kotlin
-    implementation("info.skyblond:bencodekt:+")
+dependencies {
+    implementation("info.skyblond:bencodekt:Tag")
+}
 ```
 
 ## Usage
