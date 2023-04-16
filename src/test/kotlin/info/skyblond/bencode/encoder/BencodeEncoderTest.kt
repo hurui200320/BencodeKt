@@ -9,9 +9,9 @@ class BencodeEncoderTest {
     @Test
     fun test() {
         val obj = BEntry.BMap(mapOf(
-            "number" to Supplier { BEntry.BInteger(456.toBigInteger()) },
-            "string" to Supplier { BEntry.BString("This is a string!") },
-            "list" to Supplier {
+            "number" to { BEntry.BInteger(456.toBigInteger()) },
+            "string" to { BEntry.BString("This is a string!") },
+            "list" to {
                 BEntry.BList(sequence {
                     yield(BEntry.BString("String in a list"))
                     yield(BEntry.BInteger(111.toBigInteger()))
@@ -25,16 +25,16 @@ class BencodeEncoderTest {
                     yield(
                         BEntry.BMap(
                             mapOf(
-                                "map in list" to Supplier { BEntry.BString("value!!") }
+                                "map in list" to { BEntry.BString("value!!") }
                             )
                         )
                     )
                 })
             },
-            "dict" to Supplier {
+            "dict" to {
                 BEntry.BMap(
                     mapOf(
-                        "map in map" to Supplier { BEntry.BString("value!!") }
+                        "map in map" to { BEntry.BString("value!!") }
                     )
                 )
             }

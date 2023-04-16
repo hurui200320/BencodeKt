@@ -34,7 +34,7 @@ class BencodeWriter(
         // for map, map the key to string and map value to BEntry
         is Map<*, *> -> BEntry.BMap(obj.mapKeys {
             if (it.key is String) it.key as String else it.key.toString()
-        }.mapValues { Supplier<BEntry> { mapToBEntry(it.value!!) } })
+        }.mapValues { { mapToBEntry(it.value!!) } })
         // for general object, search mapper and apply the transform
         else -> ((mapper.find { it.canHandle(obj) }
             ?: error("Mapper not found: ${obj.javaClass}"))

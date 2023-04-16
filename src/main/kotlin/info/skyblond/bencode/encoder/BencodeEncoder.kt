@@ -36,7 +36,7 @@ class BencodeEncoder(
         writer.write("d")
         entry.value.keys.sorted().forEach { k ->
             writeEntry(BEntry.BString(k))
-            writeEntry(entry.value[k]!!.get())
+            writeEntry(entry.value[k]!!())
         }
         writer.write("e")
     }

@@ -59,10 +59,10 @@ sealed interface BEntry {
     /**
      * The dictionary in Bencode. Represented by a [Map].
      *
-     * This Map use [Supplier] as value, so the actual data is generated
+     * This Map use supplier as value, so the actual data is generated
      * on demand when writing.
      * */
-    data class BMap(val value: Map<String, Supplier<BEntry>>) : BEntry{
+    data class BMap(val value: Map<String, () -> BEntry>) : BEntry{
         companion object : BEntryType {
             override fun toString(): String = "BEntryType.BMap"
         }
