@@ -6,9 +6,9 @@ import java.math.BigInteger
 import java.util.function.Supplier
 
 class BencodeWriter(
-    writer: Writer,
+    private val writer: Writer,
     private val mapper: List<BencodeEncoderMapper<*>> = emptyList()
-) {
+): AutoCloseable {
     private val encoder = BencodeEncoder(writer)
 
     @Suppress("UNCHECKED_CAST")
@@ -45,4 +45,7 @@ class BencodeWriter(
 
     fun write(obj: Any): Unit = encoder.writeEntry(mapToBEntry(obj))
 
+    fun flush() = writer.flush()
+
+    override fun close() = writer.close()
 }

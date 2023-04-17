@@ -17,13 +17,13 @@ class BencodeDecoderTest {
         val decoder = BencodeDecoder(reader)
         // d
         assertTrue(decoder.hasNext())
-        assertEquals(BEntryType.MapStart, decoder.nextType())
+        assertEquals(BEntry.BMap, decoder.nextType())
         decoder.startMap()
         //     4:dict
         assertEquals(BEntry.BString, decoder.nextType())
         assertEquals("dict", decoder.readString())
         //     d
-        assertEquals(BEntryType.MapStart, decoder.nextType())
+        assertEquals(BEntry.BMap, decoder.nextType())
         decoder.startMap()
         //         10:map in map
         assertEquals(BEntry.BString, decoder.nextType())
@@ -38,7 +38,7 @@ class BencodeDecoderTest {
         assertEquals(BEntry.BString, decoder.nextType())
         assertEquals("list", decoder.readString())
         //     l
-        assertEquals(BEntryType.ListStart, decoder.nextType())
+        assertEquals(BEntry.BList, decoder.nextType())
         decoder.startList()
         //         16:String in a list
         assertEquals(BEntry.BString, decoder.nextType())
@@ -47,7 +47,7 @@ class BencodeDecoderTest {
         assertEquals(BEntry.BInteger, decoder.nextType())
         assertEquals("111", decoder.readInteger().toString(10))
         //         l
-        assertEquals(BEntryType.ListStart, decoder.nextType())
+        assertEquals(BEntry.BList, decoder.nextType())
         decoder.startList()
         //             31:LOL, string in a list in a list
         assertEquals(BEntry.BString, decoder.nextType())
@@ -56,7 +56,7 @@ class BencodeDecoderTest {
         assertEquals(BEntryType.EntityEnd, decoder.nextType())
         decoder.endEntity()
         //         d
-        assertEquals(BEntryType.MapStart, decoder.nextType())
+        assertEquals(BEntry.BMap, decoder.nextType())
         decoder.startMap()
         //             11:map in list
         assertEquals(BEntry.BString, decoder.nextType())

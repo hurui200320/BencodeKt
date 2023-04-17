@@ -32,8 +32,8 @@ class BencodeReader(
         return when (decoder.nextType()) {
             BEntry.BInteger -> BEntry.BInteger
             BEntry.BString -> BEntry.BString
-            BEntryType.ListStart -> BEntry.BList
-            BEntryType.MapStart -> BEntry.BMap
+            BEntry.BList -> BEntry.BList
+            BEntry.BMap -> BEntry.BMap
             else -> error("Impossible type: ${decoder.nextType()}")
         }
     }
@@ -65,9 +65,8 @@ class BencodeReader(
                 BEntryType.EntityEnd -> break // this is the end of the list
                 BEntry.BInteger -> list.add(readInteger())
                 BEntry.BString -> list.add(readString())
-                BEntryType.ListStart -> list.add(readList())
-                BEntryType.MapStart -> list.add(readMap())
-                else -> error("Impossile type: ${decoder.nextType()}")
+                BEntry.BList -> list.add(readList())
+                BEntry.BMap -> list.add(readMap())
             }
         }
         decoder.endEntity()
@@ -95,9 +94,8 @@ class BencodeReader(
                 BEntryType.EntityEnd -> break // this is the end of the list
                 BEntry.BInteger -> callback.accept(readInteger())
                 BEntry.BString -> callback.accept(readString())
-                BEntryType.ListStart -> callback.accept(readList())
-                BEntryType.MapStart -> callback.accept(readMap())
-                else -> error("Impossile type: ${decoder.nextType()}")
+                BEntry.BList -> callback.accept(readList())
+                BEntry.BMap -> callback.accept(readMap())
             }
         }
         decoder.endEntity()
@@ -122,8 +120,8 @@ class BencodeReader(
             when (val t = decoder.nextType()) {
                 BEntry.BInteger -> map[key] = readInteger()
                 BEntry.BString -> map[key] = readString()
-                BEntryType.ListStart -> map[key] = readList()
-                BEntryType.MapStart -> map[key] = readMap()
+                BEntry.BList -> map[key] = readList()
+                BEntry.BMap -> map[key] = readMap()
                 else -> error("Invalid next type: $t")
             }
         }
@@ -154,8 +152,8 @@ class BencodeReader(
             when (val t = decoder.nextType()) {
                 BEntry.BInteger -> callback.accept(key, readInteger())
                 BEntry.BString -> callback.accept(key, readString())
-                BEntryType.ListStart -> callback.accept(key, readList())
-                BEntryType.MapStart -> callback.accept(key, readMap())
+                BEntry.BList -> callback.accept(key, readList())
+                BEntry.BMap -> callback.accept(key, readMap())
                 else -> error("Invalid next type: $t")
             }
         }

@@ -115,7 +115,7 @@ val map = BEntry.BMap(mapOf(
 ))
 ```
 
-You can implement the `BencodeEncodable` interface:
+To write an object, you can implement the `BencodeEncodable` interface:
 
 ```kotlin
 data class Point(
@@ -157,7 +157,7 @@ println(writer.toString())
 // output: d1:xi3e1:yi4ee
 ```
 
-You may notice there is no `BEntry` in the mapper. Because by default,
+You may notice there is no `BEntry` returned by mapper. Because by default,
 The writer can understand basic types like integers, list, map etc.
 You can simply return in those form and let the writer do the rest.
 Also, you can return other classed as long as you provide mapper for them.

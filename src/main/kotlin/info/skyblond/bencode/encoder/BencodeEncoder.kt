@@ -35,7 +35,7 @@ class BencodeEncoder(
     private fun writeBMap(entry: BEntry.BMap) {
         writer.write("d")
         entry.value.keys.sorted().forEach { k ->
-            writeEntry(BEntry.BString(k))
+            writeBString(BEntry.BString(k))
             writeEntry(entry.value[k]!!())
         }
         writer.write("e")

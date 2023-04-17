@@ -43,15 +43,15 @@ class BencodeDecoder(
      *
      * + [BEntry.BInteger]: The next one is an integer.
      * + [BEntry.BString]: The next one is a string.
-     * + [BEntryType.ListStart]: The next one is a list.
-     * + [BEntryType.MapStart]: The next one is a map.
+     * + [BEntry.BList]: The next one is a list.
+     * + [BEntry.BMap]: The next one is a map.
      * + [BEntryType.EntityEnd]: This is the end of last list/map.
      * */
     fun nextType(): BEntryType = when (c.toChar()) {
         'i' -> BEntry.BInteger
         in ('1'..'9') -> BEntry.BString
-        'l' -> BEntryType.ListStart
-        'd' -> BEntryType.MapStart
+        'l' -> BEntry.BList
+        'd' -> BEntry.BMap
         'e' -> BEntryType.EntityEnd
         else -> error("Illegal char: $c")
     }
@@ -103,7 +103,7 @@ class BencodeDecoder(
      * This is nothing to return, just skip the 'l' chars.
      * */
     fun startList() {
-        check(nextType() == BEntryType.ListStart) { "Next one is ${nextType()}, but requested as list start" }
+        check(nextType() == BEntry.BList) { "Next one is ${nextType()}, but requested as list start" }
         loadNextChar()
     }
 
@@ -117,7 +117,7 @@ class BencodeDecoder(
      * This is nothing to return, just skip the 'd' chars.
      * */
     fun startMap() {
-        check(nextType() == BEntryType.MapStart) { "Next one is ${nextType()}, but requested as map start" }
+        check(nextType() == BEntry.BMap) { "Next one is ${nextType()}, but requested as map start" }
         loadNextChar()
     }
 

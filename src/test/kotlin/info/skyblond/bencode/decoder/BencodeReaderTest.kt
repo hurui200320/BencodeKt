@@ -1,7 +1,6 @@
 package info.skyblond.bencode.decoder
 
 import info.skyblond.bencode.BEntry
-import info.skyblond.bencode.BEntryType
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

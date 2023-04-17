@@ -1,18 +1,9 @@
 package info.skyblond.bencode
 
 import java.math.BigInteger
-import java.util.function.Supplier
 
 
 sealed interface BEntryType {
-    object ListStart : BEntryType {
-        override fun toString(): String = "BEntryType.ListStart"
-    }
-
-    object MapStart : BEntryType {
-        override fun toString(): String = "BEntryType.MapStart"
-    }
-
     object EntityEnd : BEntryType {
         override fun toString(): String = "BEntryType.EntityEnd"
     }
@@ -50,7 +41,7 @@ sealed interface BEntry {
      * In this manner, you can use an already generated [List], or
      * generate your data on demand (not caching them in memory).
      * */
-    data class BList(val value: Sequence<BEntry>) : BEntry{
+    data class BList(val value: Sequence<BEntry>) : BEntry {
         companion object : BEntryType {
             override fun toString(): String = "BEntryType.BList"
         }
@@ -62,7 +53,7 @@ sealed interface BEntry {
      * This Map use supplier as value, so the actual data is generated
      * on demand when writing.
      * */
-    data class BMap(val value: Map<String, () -> BEntry>) : BEntry{
+    data class BMap(val value: Map<String, () -> BEntry>) : BEntry {
         companion object : BEntryType {
             override fun toString(): String = "BEntryType.BMap"
         }
